@@ -15,8 +15,8 @@ const SiteContainer = styled.div`
     rgba(5, 117, 187, 1) 100%
   );
   margin: 0 auto;
-  height: 150vh;
   padding: 0 12px;
+  padding-bottom: 12px;
 `;
 
 const LogoHeader = styled(Link)`

@@ -69,7 +69,7 @@ const CategoriesBar = () => {
       </CategoryButton>
       <CategoriesDropdown>
         <p>Categorías:</p>
-        <select>
+        <select defaultValue="Ver Todas">
           <option>Seleccionar categoría</option>
           <option>Ver Todas</option>
           <option>-----</option>
