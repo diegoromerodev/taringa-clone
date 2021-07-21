@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const ContentContainer = styled.div`
+  background: #fafafa;
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+`;
+
 const SectionHeader = styled.div`
   background: linear-gradient(
     180deg,
@@ -51,18 +60,26 @@ const WidgetOptions = styled.div`
 const WidgetLink = styled(Link)`
   display: inline-block;
   color: #333;
+  background: transparent;
+  padding: 0;
   font-weight: 600;
-  padding: 0 7px;
   border-radius: 20px;
   margin: 5px;
   font-size: 11px;
-  color: #fafafa;
-  text-shadow: 0px 2px 0 rgba(5, 5, 5, 0.5);
-  background: linear-gradient(0, #777, #555);
-  &.clicked {
+  &.selected-widget-link {
+    padding: 0 7px;
+    color: #333;
     color: #fafafa;
-    background: linear-gradient(180deg, #444, #999);
+    text-shadow: 0px 2px 0 rgba(5, 5, 5, 0.5);
+    background: linear-gradient(0, #777, #555);
   }
 `;
 
-export { SectionHeader, WidgetBody, WidgetItem, WidgetOptions, WidgetLink };
+export {
+  ContentContainer,
+  SectionHeader,
+  WidgetBody,
+  WidgetItem,
+  WidgetOptions,
+  WidgetLink,
+};

@@ -8,121 +8,36 @@ import {
   WidgetOptions,
 } from "../../../styles/StyleAccents";
 
-const TopPosts = () => {
+const TopPosts = ({ posts }) => {
   return (
     <WidgetBody>
       <SectionHeader>
         <p>TOPs posts</p>
       </SectionHeader>
       <WidgetOptions>
-        <WidgetLink>Ayer</WidgetLink> -<WidgetLink>Semana</WidgetLink> -
-        <WidgetLink>Mes</WidgetLink> -<WidgetLink>Histórico</WidgetLink>
+        <WidgetLink to="#">Ayer</WidgetLink> -
+        <WidgetLink to="#">Semana</WidgetLink> -
+        <WidgetLink to="#">Mes</WidgetLink> -
+        <WidgetLink to="#" className="selected-widget-link">
+          Histórico
+        </WidgetLink>
       </WidgetOptions>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>01.</span> • Messi, Te Pido Perdón Y
-          Te Doy
-        </p>
-        <span>9730</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>02.</span> Postear en Facebook desde
-          lugares i
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>03.</span> armando una pc gamer con
-          taringa.
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>04.</span> • Messi, Te Pido Perdón Y
-          Te Doy
-        </p>
-        <span>9730</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>05.</span> Postear en Facebook desde
-          lugares i
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>06.</span> armando una pc gamer con
-          taringa.
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>07.</span> • Messi, Te Pido Perdón Y
-          Te Doy
-        </p>
-        <span>9730</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>08.</span> Postear en Facebook desde
-          lugares i
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>09.</span> armando una pc gamer con
-          taringa.
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>10.</span> • Messi, Te Pido Perdón Y
-          Te Doy
-        </p>
-        <span>9730</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>11.</span> Postear en Facebook desde
-          lugares i
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>12.</span> armando una pc gamer con
-          taringa.
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>13.</span> • Messi, Te Pido Perdón Y
-          Te Doy
-        </p>
-        <span>9730</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>14.</span> Postear en Facebook desde
-          lugares i
-        </p>
-        <span>5900</span>
-      </WidgetItem>
-      <WidgetItem className="two-options">
-        <p>
-          <span style={{ fontWeight: 600 }}>15.</span> armando una pc gamer con
-          taringa.
-        </p>
-        <span>5900</span>
-      </WidgetItem>
+      {posts
+        .sort((a, b) => b.points - a.points)
+        .map((post, index) => {
+          if (index > 9) return null;
+          return (
+            <WidgetItem key={"toppo" + post.id} className="two-options">
+              <p>
+                <strong>{(index + 1).toString().padStart(2, "0")} </strong>
+                {post?.title?.length > 40
+                  ? post.title.slice(0, 38) + "..."
+                  : post.title}
+              </p>
+              <span>{post.points}</span>
+            </WidgetItem>
+          );
+        })}
     </WidgetBody>
   );
 };

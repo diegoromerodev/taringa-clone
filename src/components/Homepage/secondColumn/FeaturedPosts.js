@@ -8,56 +8,35 @@ import {
   WidgetOptions,
 } from "../../../styles/StyleAccents";
 
-const FeaturedPosts = () => {
+const FeaturedPosts = ({ posts }) => {
   return (
     <WidgetBody>
       <SectionHeader>
         <p>Posts destacados - Global</p>
       </SectionHeader>
       <WidgetOptions>
-        <WidgetLink>15m</WidgetLink>-<WidgetLink>1h</WidgetLink>-
-        <WidgetLink>3h</WidgetLink>-<WidgetLink>6h</WidgetLink>
+        <WidgetLink to="/">15m</WidgetLink>-<WidgetLink to="/">1h</WidgetLink>-
+        <WidgetLink to="/">3h</WidgetLink>-
+        <WidgetLink className="selected-widget-link" to="/">
+          6h
+        </WidgetLink>
       </WidgetOptions>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>01. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>02. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>03. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>04. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>05. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>06. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>07. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>08. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>09. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
-      <WidgetItem>
-        <span style={{ fontWeight: 600 }}>10. </span>Fui a Tecnópolis y te lo
-        comparto
-      </WidgetItem>
+      {posts
+        .filter((a) => a.points > 150)
+        .map((post, index) => {
+          if (index > 9) return null;
+          return (
+            <WidgetItem key={"fpost" + post.id} className="two-options">
+              <p>
+                <strong>{(index + 1).toString().padStart(2, "0")} </strong>
+                {post?.title.length > 40
+                  ? post.title.slice(0, 38) + "..."
+                  : post.title}
+              </p>
+              <span>{post.points}</span>
+            </WidgetItem>
+          );
+        })}
     </WidgetBody>
   );
 };

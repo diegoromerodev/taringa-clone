@@ -14,14 +14,14 @@ const ColumnContainer = styled.div`
   justify-content: space-between;
 `;
 
-const PostsWidgets = () => {
+const PostsWidgets = ({ posts, setPosts }) => {
   return (
     <ColumnContainer>
       <SearchWidget></SearchWidget>
       <OnlineUsers></OnlineUsers>
-      <LatestComments></LatestComments>
-      <FeaturedPosts></FeaturedPosts>
-      <TopPosts></TopPosts>
+      <LatestComments posts={posts}></LatestComments>
+      <FeaturedPosts posts={posts}></FeaturedPosts>
+      <TopPosts posts={posts}></TopPosts>
       <TopUsers></TopUsers>
     </ColumnContainer>
   );

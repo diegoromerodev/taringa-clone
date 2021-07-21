@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { SectionHeader } from "../../styles/StyleAccents";
@@ -45,8 +46,7 @@ const SinglePostLink = styled.li`
   }
 `;
 
-const PostsList = () => {
-  const [posts, setPosts] = useState([]);
+const PostsList = ({ posts, setPosts }) => {
   useEffect(() => {
     firebase
       .firestore()
@@ -54,8 +54,13 @@ const PostsList = () => {
       .get()
       .then((querySnapshot) => {
         const postRetrieval = [];
+        let count = 0;
         querySnapshot.forEach((doc) => {
-          postRetrieval.push(doc.data());
+          if (count >= 24) return null;
+          const rawDoc = doc.data();
+          rawDoc.id = doc.id;
+          postRetrieval.push(rawDoc);
+          count++;
         });
 
         setPosts(postRetrieval);
@@ -70,10 +75,15 @@ const PostsList = () => {
         <p>Últimos posts</p>
       </SectionHeader>
       {posts.map((post) => (
-        <SinglePostLink className={post.category}>
-          {post.title.length > 60
-            ? post.title.slice(0, 57) + "..."
-            : post.title}
+        <SinglePostLink
+          key={post.id}
+          className={"categoriaPost " + post.category}
+        >
+          <Link to={`/posts/${post.id}`}>
+            {post?.title?.length > 60
+              ? post.title.slice(0, 57) + "..."
+              : post.title}
+          </Link>
         </SinglePostLink>
       ))}
     </PostsContainer>
@@ -81,3 +91,4 @@ const PostsList = () => {
 };
 
 export default PostsList;
+export { SinglePostLink };

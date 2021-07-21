@@ -16,23 +16,29 @@ const RelevantBody = styled.div`
   }
 `;
 
-const RelevantTags = () => {
+const RelevantTags = ({ posts }) => {
   return (
     <WidgetBody>
       <SectionHeader>Últimos tags relevantes</SectionHeader>
       <RelevantBody>
-        <h1>video</h1>
-        <h1>imagen</h1>
-        <h3 className="thin">paraguay</h3>
-        <h1>video</h1>
-        <h1>juegos</h1>
-        <h3>paraguay</h3>
-        <h1>comida</h1>
-        <h1>imagen</h1>
-        <h3>paraguay</h3>
-        <h1>video</h1>
-        <h1>imagen</h1>
-        <h1 className="thin">venezuela</h1>
+        {posts
+          .reduce((acc, currPost) => {
+            if (!currPost.tags || acc.length > 15) return acc;
+            return [...acc, ...currPost.tags];
+          }, [])
+          .map((tag, index) => {
+            return (
+              <h1
+                key={tag + index}
+                className={Math.random() < 0.2 ? "thin" : ""}
+                style={{
+                  fontSize: Math.floor(Math.random() * (35 - 60)) + 35 + "px",
+                }}
+              >
+                {tag}
+              </h1>
+            );
+          })}
       </RelevantBody>
     </WidgetBody>
   );

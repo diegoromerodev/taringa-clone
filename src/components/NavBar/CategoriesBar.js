@@ -73,8 +73,6 @@ const CategoriesBar = () => {
           <option>Seleccionar categoría</option>
           <option>Ver Todas</option>
           <option>-----</option>
-          <option>Animaciones</option>
-          <option>Apuntes y Monografías</option>
         </select>
       </CategoriesDropdown>
     </CategoriesDiv>

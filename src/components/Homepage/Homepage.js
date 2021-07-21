@@ -1,23 +1,22 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
+import { Redirect } from "react-router";
+import { UserContext } from "../../providers/UserProvider";
+import { userExists } from "../../services/firebase";
+import { ContentContainer } from "../../styles/StyleAccents";
 import MoreWidgets from "./MoreWidgets";
 import PostsList from "./PostsList";
 import PostsWidgets from "./PostsWidgets";
 
-const ContentContainer = styled.div`
-  background: #fafafa;
-  padding: 10px;
-  border-radius: 0 0 5px 5px;
-  display: flex;
-  justify-content: space-evenly;
-`;
-
-const Homepage = () => {
+const Homepage = ({ posts, setPosts, userExists }) => {
+  const user = useContext(UserContext);
+  if (user?.email && (!user.description || !user.photo)) {
+    return <Redirect to="/signup"></Redirect>;
+  }
   return (
     <ContentContainer>
-      <PostsList></PostsList>
-      <PostsWidgets></PostsWidgets>
-      <MoreWidgets></MoreWidgets>
+      <PostsList posts={posts} setPosts={setPosts}></PostsList>
+      <PostsWidgets posts={posts} setPosts={setPosts}></PostsWidgets>
+      <MoreWidgets posts={posts}></MoreWidgets>
     </ContentContainer>
   );
 };

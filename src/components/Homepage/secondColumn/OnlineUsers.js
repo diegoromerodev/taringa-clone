@@ -37,7 +37,7 @@ const OnlineUsers = () => {
         <p>68.808.252 comentarios</p>
       </WidgetItem>
       <SmallBanner>
-        <Link>Taringa! en vivo</Link>
+        <Link to="#">Taringa! en vivo</Link>
       </SmallBanner>
     </PostCountWidgetBody>
   );

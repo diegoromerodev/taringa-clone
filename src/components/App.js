@@ -1,9 +1,15 @@
-import React from "react";
-import { HashRouter, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
+import UserProvider from "../providers/UserProvider";
+import { signInWithGoogle, signOut } from "../services/firebase";
 import GlobalStyles from "../styles/GlobalStyles";
 import Homepage from "./Homepage/Homepage";
 import Navbar from "./NavBar/Navbar";
+import CreatePost from "./Post/CreatePost";
+import Post from "./Post/Post";
+import SignUp from "./User/SignUp";
+import User from "./User/User";
 
 const SiteContainer = styled.div`
   width: 960px;
@@ -51,6 +57,7 @@ const FlexDiv = styled.div`
 `;
 
 const App = () => {
+  const [posts, setPosts] = useState([]);
   return (
     <SiteContainer>
       <GlobalStyles />
@@ -59,8 +66,26 @@ const App = () => {
           <LogoHeader to="/">TARINGA!</LogoHeader>
           <Subheader to="/">INTELIGENCIA COLECTIVA</Subheader>
         </FlexDiv>
-        <Navbar />
-        <Homepage />
+        <UserProvider>
+          <Navbar signInWithGoogle={signInWithGoogle} signOut={signOut} />
+          <Switch>
+            <Route path="/" exact={true}>
+              <Homepage posts={posts} setPosts={setPosts} />
+            </Route>
+            <Route path="/crear-post" exact={true}>
+              <CreatePost />
+            </Route>
+            <Route path="/posts/:id">
+              <Post />
+            </Route>
+            <Route path="/users/:id">
+              <User posts={posts} />
+            </Route>
+            <Route path="/signup">
+              <SignUp></SignUp>
+            </Route>
+          </Switch>
+        </UserProvider>
       </HashRouter>
     </SiteContainer>
   );

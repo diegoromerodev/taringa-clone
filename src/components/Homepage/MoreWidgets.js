@@ -7,11 +7,11 @@ const MoreContainer = styled.div`
   width: 250px;
 `;
 
-const MoreWidgets = () => {
+const MoreWidgets = ({ posts }) => {
   return (
     <MoreContainer>
       <WeatherWidget></WeatherWidget>
-      <RelevantTags></RelevantTags>
+      <RelevantTags posts={posts}></RelevantTags>
     </MoreContainer>
   );
 };

@@ -17,11 +17,19 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
+        exclude: /node_moules/,
         use: "babel-loader",
+      },
+      {
+        test: /\.s?css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
       },
     ],
   },
-  devtool: "inline-source-map",
   devServer: {
     contentBase: "public",
   },
